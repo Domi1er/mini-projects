@@ -5,20 +5,63 @@ print("Willkommen zum Quiz!")
 
 fragen = [
     {
-        "frage": "Was ist die Hauptstadt von Deutschland?",
-        "antwort": "Berlin"
+        "frage": "Was gibt len('Hallo') zurück?",
+        "antwort": "5",
+        "kategorie": "Python"
     },
     {
-        "frage": "Wie viele Kontinente gibt es?",
-        "antwort": "7"
+        "frage": "Was ist eine Variable?",
+        "antwort": "Speicherplatz für einen Wert",
+        "kategorie": "Python"
     },
     {
         "frage": "Wie viel ist 5 + 7?",
-        "antwort": "12"
+        "antwort": "12",
+        "kategorie": "Mathematik"
+    },
+    {
+        "frage": "Wie viel ist 8 * 6?",
+        "antwort": "48",
+        "kategorie": "Mathematik"
     }
 ]
+while True:
+    print()
+    print("Wähle eine Kategorie:")
+    print("1 - Python")
+    print("2 - Mathematik")
+
+    auswahl = input("Deine Auswahl: ")
+
+    if auswahl == "1":
+        kategorie = "Python"
+        break
+    elif auswahl == "2":
+        kategorie = "Mathematik"
+        break
+    else:
+        print("Ungültige Auswahl. Bitte wähle 1 oder 2.")    
+
+fragen = [frage for frage in fragen if frage["kategorie"] == kategorie]
+
 random.shuffle(fragen)
 punkte = 0
+
+def ergebnis_anzeiggen(punkte, anzahl_fragen):
+    prozent = punkte / anzahl_fragen * 100
+
+    print()
+    print("==== Ergebnis ====")
+    print(f"{punkte}/{anzahl_fragen} richtig - {prozent:.1f} %")
+
+    if prozent == 100:
+        print("Perfekt! 🎉")
+    elif prozent >= 80:
+        print("Sehr gut! 👍")
+    elif prozent >= 60:
+        print("Gut gemacht!")
+    else:
+        print("Strend dich mal an! 😅")
 
 for frage in fragen:
     print(frage["frage"])
@@ -32,8 +75,4 @@ for frage in fragen:
         print(f" ✗ Falsch! ")
         print(f"Die richtige Antwort ist: {frage['antwort']}")
 
-prozent = (punkte / len(fragen)) * 100
-
-print()
-print("==== Ergebnis ====")
-print(f"{punkte}/{len(fragen)} richtig - {prozent: .1f} %")
+ergebnis_anzeiggen(punkte, len(fragen))
